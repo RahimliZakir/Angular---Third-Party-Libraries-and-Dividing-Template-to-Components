@@ -1,45 +1,47 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from 'src/models/product';
+import { AlertifyService } from 'src/services/alertify.service';
+import { ProductService } from 'src/services/product.service';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
 })
+
 export class ProductDetailsComponent implements OnInit {
 
-  products: any[] = [];
+  productId: number = 0;
+  name: string = '';
+
+  products: Product[] = [];
 
   productDetails: any = {};
 
-  constructor() { }
+  constructor(private productService: ProductService,
+    private activatedRoute: ActivatedRoute,
+    private alertifyJS: AlertifyService) { }
 
   ngOnInit() {
-    this.products = [
-      {
-        id: 1,
-        imgUrl: "https://picsum.photos/id/120/200/300",
-        title: "Samsung - 1",
-        description: 'All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.'
-      },
-      {
-        id: 2,
-        imgUrl: "https://picsum.photos/id/121/200/300",
-        title: "Samsung - 2",
-        description: 'All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.'
-      }, {
-        id: 3,
-        imgUrl: "https://picsum.photos/id/122/200/300",
-        title: "Apple - 1",
-        description: 'All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.'
-      }, {
-        id: 4,
-        imgUrl: "https://picsum.photos/id/123/200/300",
-        title: "Apple - 2",
-        description: 'All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.'
-      }
-    ];
+    // Route
+    this.activatedRoute.params.subscribe(param => {
+      this.productId = param['productId'];
 
-    this.productDetails = this.products[0];
+      this.productDetails = this.productService.GetProductById(this.productId);
+
+      if (this.productId <= 0 || this.productDetails == undefined) {
+
+        this.alertifyJS.error("Belə məhsul yoxdur!");
+
+        return;
+      }
+    });
+
+    // QueryString
+    this.activatedRoute.queryParams.subscribe(query => {
+      this.name = query["name"];
+    });
   }
 
 }

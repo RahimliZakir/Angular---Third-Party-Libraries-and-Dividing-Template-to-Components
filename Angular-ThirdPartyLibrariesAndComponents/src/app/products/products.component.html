@@ -6,9 +6,13 @@
           <img [src]="item.imgUrl" class="card-img-top" [title]="item.title" alt="...">
         </div>
         <div class="card-body">
-          <h5 class="card-title">{{item.title}}</h5>
-          <p class="card-text">{{item.description}}</p>
-          <a routerLink="/product-details" class="btn btn-primary">Ətraflı</a>
+          <h5 class="card-title d-flex align-items-center justify-content-between">
+            <span>{{item.title | uppercase}}</span>
+            <span class="badge bg-success">{{item.price | currency:'USD': 'symbol':'1.2'}}</span>
+            <span class="badge bg-warning">{{item.price | number:'1.2-4'}}</span>
+          </h5>
+          <p class="card-text">{{item.description | lowercase}}</p>
+          <a [routerLink]="['/product', item.id]" class="btn btn-primary">Ətraflı</a>
         </div>
       </div>
     </div>

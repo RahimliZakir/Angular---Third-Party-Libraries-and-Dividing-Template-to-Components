@@ -7,18 +7,20 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [			
+  declarations: [
     AppComponent,
-      HeaderComponent,
-      SidebarComponent,
-      ProductsComponent,
-      ProductDetailsComponent
-   ],
+    HeaderComponent,
+    SidebarComponent,
+    ProductsComponent,
+    ProductDetailsComponent
+  ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

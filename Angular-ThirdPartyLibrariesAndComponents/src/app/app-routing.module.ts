@@ -5,7 +5,7 @@ import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
   { path: "products", component: ProductsComponent },
-  { path: "product-details", component: ProductDetailsComponent },
+  { path: "product/:productId", component: ProductDetailsComponent },
   // Path bosh olsa "product"-a qaytarir, "pathMatch"-de de tam ust-uste dushmeyini gosteririk. 
   { path: '', redirectTo: 'products', pathMatch: 'full' }
 ];
