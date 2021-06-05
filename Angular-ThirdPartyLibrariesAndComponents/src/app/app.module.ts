@@ -8,6 +8,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { FormsModule } from '@angular/forms';
+import { FilterPipe } from 'src/pipes/filter.pipe';
+import { ManatPipe } from 'src/pipes/manat.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     SidebarComponent,
     ProductsComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    FilterPipe,
+    ManatPipe
   ],
   imports: [
     BrowserModule,

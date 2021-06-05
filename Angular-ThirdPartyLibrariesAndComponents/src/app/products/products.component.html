@@ -1,6 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <input type="text" class="form-control" [(ngModel)]="searchText">
+      <span *ngIf="searchText.length > 0">Axtarış mətni: {{searchText}}</span>
+    </div>
+  </div>
+</div>
+
 <div class="container py-2">
   <div class="row">
-    <div class="col-md-4 mb-2" *ngFor="let item of products">
+    <div class="col-md-4 mb-2" *ngFor="let item of products | filter: searchText">
       <div class="card" [id]="item.id" style="width: 18rem;">
         <div class="img-div">
           <img [src]="item.imgUrl" class="card-img-top" [title]="item.title" alt="...">
@@ -8,7 +17,9 @@
         <div class="card-body">
           <h5 class="card-title d-flex align-items-center justify-content-between">
             <span>{{item.title | uppercase}}</span>
-            <span class="badge bg-success">{{item.price | currency:'USD': 'symbol':'1.2'}}</span>
+            <span class="badge bg-success">{{item.price | manat}}</span>
+            <!-- manat:"AZN" -->
+            <!-- currency:'USD': 'symbol' :'1.2' -->
             <span class="badge bg-warning">{{item.price | number:'1.2-4'}}</span>
           </h5>
           <p class="card-text">{{item.description | lowercase}}</p>
